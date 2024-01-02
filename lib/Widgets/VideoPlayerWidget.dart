@@ -42,7 +42,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         return <OptionItem>[
           OptionItem(
             onTap: () {
-              _showQualityOptions(context);
+              _showQualityDialog(context);
             },
             iconData: Icons.video_settings_outlined,
             title: "Video Quality",
@@ -75,21 +75,27 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     );
   }
 
-  Future<void> _showQualityOptions(BuildContext context) async {
-    await showModalBottomSheet(
+  void _showQualityDialog(BuildContext context) {
+    showDialog(
       context: context,
       builder: (BuildContext context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: widget.urls.map((source) {
-            return ListTile(
-              title: Text(source.quality),
-              onTap: () {
-                _onQualitySelected(source.quality);
-                Navigator.pop(context);
-              },
-            );
-          }).toList(),
+        return AlertDialog(
+          title: Text("Select Video Quality"),
+          content: DropdownButton<String>(
+            value: selectedQuality,
+            items: widget.urls.map((source) {
+              return DropdownMenuItem<String>(
+                value: source.quality,
+                child: Text(source.quality),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              if (newValue != null) {
+                _onQualitySelected(newValue);
+                Navigator.of(context).pop();
+              }
+            },
+          ),
         );
       },
     );
