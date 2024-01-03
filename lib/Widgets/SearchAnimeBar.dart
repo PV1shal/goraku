@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:goraku/Models/SearchMetaModel.dart';
+import 'package:goraku/Screens/AnimeInfoPage.dart';
 import 'package:http/http.dart' as http;
 
 class SearchAnimeBar extends SearchDelegate {
@@ -52,7 +53,10 @@ class SearchAnimeBar extends SearchDelegate {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    print("wasd");
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => AnimeInfoPage(
+                              searchResultsModel: snapshot.data!.results[index],
+                            )));
                   },
                   child: Card(
                     elevation: 3,
