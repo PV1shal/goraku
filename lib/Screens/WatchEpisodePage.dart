@@ -17,14 +17,12 @@ class WatchEpisodePage extends StatefulWidget {
 
 class _WatchEpisodePageState extends State<WatchEpisodePage> {
   late Future<WatchEpisodeModel> episodeSources;
-  late String _quality;
   late List<String> dropDownQualities;
 
   @override
   void initState() {
     super.initState();
     episodeSources = fetchEpisodeSources();
-    _quality = "default";
   }
 
   Future<WatchEpisodeModel> fetchEpisodeSources() async {

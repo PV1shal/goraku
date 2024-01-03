@@ -3,7 +3,7 @@ import 'package:goraku/Screens/AnimePage.dart';
 import 'package:goraku/Screens/MangaPage.dart';
 
 class HomePage extends StatelessWidget {
-  late String title;
+  late final String title;
   HomePage({super.key, required this.title});
 
   @override
@@ -39,25 +39,46 @@ class HomePageView extends StatelessWidget {
             ],
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              icon: const ImageIcon(
+        BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: ImageIcon(
                 AssetImage("assets/images/AnimeIcon.png"),
                 color: Colors.white,
               ),
-              onPressed: () => changePageOnClick(0),
+              label: "Anime",
             ),
-            IconButton(
-              icon: const ImageIcon(
+            BottomNavigationBarItem(
+              icon: ImageIcon(
                 AssetImage("assets/images/MangaIcon.png"),
                 color: Colors.white,
               ),
-              onPressed: () => changePageOnClick(1),
-            )
+              label: "Manga",
+            ),
           ],
-        )
+          onTap: (int index) {
+            changePageOnClick(index);
+          },
+        ),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //   children: <Widget>[
+        //     IconButton(
+        //       icon: const ImageIcon(
+        //         AssetImage("assets/images/AnimeIcon.png"),
+        //         color: Colors.white,
+        //       ),
+        //       onPressed: () => changePageOnClick(0),
+        //     ),
+        //     IconButton(
+        //       icon: const ImageIcon(
+        //         AssetImage("assets/images/MangaIcon.png"),
+        //         color: Colors.white,
+        //       ),
+        //       onPressed: () => changePageOnClick(1),
+        //     )
+        //   ],
+        // )
       ],
     );
   }

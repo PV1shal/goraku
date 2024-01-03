@@ -37,7 +37,10 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       autoPlay: false,
       allowPlaybackSpeedChanging: false,
       allowMuting: true,
-      showOptions: true,
+      showOptions: false,
+      showControlsOnInitialize: true,
+      aspectRatio: 16 / 9,
+      autoInitialize: true,
       additionalOptions: (BuildContext context) {
         return <OptionItem>[
           OptionItem(
@@ -61,9 +64,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         backgroundColor: Colors.grey,
         bufferedColor: Colors.white,
       ),
-      showControlsOnInitialize: true,
-      aspectRatio: 16 / 9,
-      autoInitialize: true,
       errorBuilder: (context, errorMessage) {
         return Center(
           child: Text(
@@ -122,6 +122,15 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               child: Chewie(
                 controller: _chewieController,
               ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              onPressed: () {
+                _showQualityDialog(context);
+              },
+              child: Text("Change Quality"),
             ),
           ),
         ],

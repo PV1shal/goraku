@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:goraku/Models/RecentEpisodesModel.dart';
 import 'package:goraku/Screens/WatchEpisodePage.dart';
+import 'package:goraku/Widgets/SearchAnimeBar.dart';
 import 'package:http/http.dart' as http;
 
 class AnimePage extends StatefulWidget {
@@ -81,6 +82,14 @@ class _AnimePageState extends State<AnimePage> {
         appBar: AppBar(
           title: const Text('Anime',
               style: TextStyle(fontWeight: FontWeight.bold)),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () async {
+                await showSearch(context: context, delegate: SearchAnimeBar());
+              },
+            ),
+          ],
         ),
         body: FutureBuilder(
           future: recentEpisodes,
