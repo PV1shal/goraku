@@ -48,6 +48,9 @@ class SearchAnimeBar extends SearchDelegate {
         future: fetchSearchData(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            if (snapshot.data!.results.isEmpty) {
+              return const Center(child: Text("No Results Found"));
+            }
             return ListView.builder(
               itemCount: snapshot.data!.results.length,
               itemBuilder: (context, index) {
